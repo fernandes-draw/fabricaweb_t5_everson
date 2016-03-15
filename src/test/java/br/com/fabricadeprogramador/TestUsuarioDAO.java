@@ -1,5 +1,7 @@
 package br.com.fabricadeprogramador;
 
+import java.util.List;
+
 import br.com.fabricadeprogramador.persinstencia.jdbc.UsuarioDAO;
 import br.com.fabricadeprogramador.persistencia.entidade.Usuario;
 
@@ -9,8 +11,40 @@ public class TestUsuarioDAO {
 
 		// testCadastrar();
 		// testAlterar();
-		testExcluir();
+		// testExcluir();
+		// testSalvar();
+		// testBuscarPorid();
+		// testBuscarTodos();
+		testAutenticar();
 
+	}
+
+	private static void testAutenticar() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+		Usuario usu = new Usuario();
+		usu.setLogin("ef");
+		usu.setSenha("123");
+
+		Usuario usuRetorno = usuarioDAO.autenticar(usu);
+		System.out.println(usuRetorno);
+
+	}
+
+	private static void testBuscarPorid() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		Usuario usuario = usuarioDAO.buscaPorId(4);
+
+		System.out.println(usuario);
+
+	}
+
+	private static void testBuscarTodos() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		List<Usuario> lista = usuarioDAO.buscarTodos();
+		for (Usuario u : lista) {
+			System.out.println(u);
+		}
 	}
 
 	public static void testExcluir() {
@@ -24,7 +58,7 @@ public class TestUsuarioDAO {
 
 		System.out.println("Excluido com Sucesso.");
 	}
-	
+
 	public static void testCadastrar() {
 		// Criando o usuário.
 		Usuario usu = new Usuario();
@@ -52,6 +86,19 @@ public class TestUsuarioDAO {
 		usuDAO.alterar(usu);
 
 		System.out.println("Alterado com Sucesso.");
+	}
+
+	public static void testSalvar() {
+		Usuario usuario = new Usuario();
+		// usuario.setId(2);
+		usuario.setNome("Junior");
+		usuario.setLogin("jr");
+		usuario.setSenha("369");
+
+		UsuarioDAO usuDAO = new UsuarioDAO();
+		usuDAO.salvar(usuario);
+
+		System.out.println("Salvo com sucesso.");
 	}
 
 }
